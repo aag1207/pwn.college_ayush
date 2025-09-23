@@ -24,4 +24,15 @@ This challenge also deals with the cat command. In this case, the flag is not co
 ## My flag
 **pwn.college{kFcb9xO0XK1dSe5lF_fNucqNITj.QX5ETO0wCO1EzNzEzW}**
 
-It was mentioned that this time, the flag wasn't directly copied onto my home directory. So, in order to read the flag folder, cat /flag(absolute path) was used. I had first done it
+It was mentioned that this time, the flag wasn't directly copied onto my home directory. So, in order to read the flag folder, cat /flag(absolute path) was used.
+
+'''
+hacker@commands~catting-absolute-paths:/home$ cat /flag
+pwn.college{kFcb9xO0XK1dSe5lF_fNucqNITj.QX5ETO0wCO1EzNzEzW}
+'''
+
+## What I learnt
+I learnt how to use the cat command and the absolute path combined. 
+
+## References
+I have reffered to the video and the instructions mentioned to complete this challenge.
