@@ -6,11 +6,11 @@ This challenge deals with the cat command. It is one of the most critical linux 
 
 It was mentioned in the challenge that the required flag was copied into the flag file of the home directory. So, in order to read the flag file and retrieve the flag, cat flag was the program executed
 
-'''
+```
 hacker@commands~cat-not-the-pet-but-the-command:~$ cat flag
 pwn.college{IS0oGiZJWk1uiu7WmdTGhh9-trK.QXxcTN0wCO1EzNzEzW}
 hacker@commands~cat-not-the-pet-but-the-command:~$
-'''
+```
 
 ## What I leant
 I learnt the use of the cat command. In order to read any file, the cat command is used.
@@ -26,10 +26,10 @@ This challenge also deals with the cat command. In this case, the flag is not co
 
 It was mentioned that this time, the flag wasn't directly copied onto my home directory. So, in order to read the flag folder, cat /flag(absolute path) was used.
 
-'''
+```
 hacker@commands~catting-absolute-paths:/home$ cat /flag
 pwn.college{kFcb9xO0XK1dSe5lF_fNucqNITj.QX5ETO0wCO1EzNzEzW}
-'''
+```
 
 ## What I learnt
 I learnt how to use the cat command and the absolute path combined. 
