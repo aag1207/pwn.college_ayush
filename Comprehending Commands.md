@@ -199,4 +199,194 @@ I have learnt how to list hidden files by using the ls -a command which may be h
 I have reffered to the video and the instructions mentioned to complete this challenge.
 
 # 11. An epic file system quest
+In this challenge, we are to retrieve the flag following a list of clues hidden in various files and directories using the cd, ls and cat commands.
 
+## My solve
+**
+
+To solve this challenge, 
+
+```
+hacker@commands~an-epic-filesystem-quest:~$ cd /
+hacker@commands~an-epic-filesystem-quest:/$ ls
+EVIDENCE  boot       dev  flag  lib    lib64   media  nix  proc  run   srv  tmp  var
+bin       challenge  etc  home  lib32  libx32  mnt    opt  root  sbin  sys  usr
+hacker@commands~an-epic-filesystem-quest:/$ cat /EVIDENCE
+Congratulations, you found the clue!
+The next clue is in: /opt/busybox/busybox-1.33.2/include/config/feature/ifconfig/memstart/ioaddr
+
+The next clue is **delayed** --- it will not become readable until you enter the directory with 'cd'.
+hacker@commands~an-epic-filesystem-quest:/$ cd /opt/busybox/busybox-1.33.2/include/config/feature/ifconfig/memstart/ioaddr
+hacker@commands~an-epic-filesystem-quest:/opt/busybox/busybox-1.33.2/include/config/feature/ifconfig/memstart/ioaddr$ ls
+TIP  irq.h
+hacker@commands~an-epic-filesystem-quest:/opt/busybox/busybox-1.33.2/include/config/feature/ifconfig/memstart/ioaddr$ cat TIP
+Tubular find!
+The next clue is in: /usr/share/X11/xkb
+
+The next clue is **delayed** --- it will not become readable until you enter the directory with 'cd'.
+hacker@commands~an-epic-filesystem-quest:/opt/busybox/busybox-1.33.2/include/config/feature/ifconfig/memstart/ioaddr$ cd /usr/share/X11/xkb
+hacker@commands~an-epic-filesystem-quest:/usr/share/X11/xkb$ ls
+MESSAGE  compat  geometry  keycodes  rules  symbols  types
+hacker@commands~an-epic-filesystem-quest:/usr/share/X11/xkb$ cat MESSAGE
+Congratulations, you found the clue!
+The next clue is in: /opt/pwndbg/.venv/lib/python3.8/site-packages/rpyc/utils
+hacker@commands~an-epic-filesystem-quest:/usr/share/X11/xkb$ cd /opt/pwndbg/.venv/lib/python3.8/site-packages/rpyc/utils
+hacker@commands~an-epic-filesystem-quest:/opt/pwndbg/.venv/lib/python3.8/site-packages/rpyc/utils$ ls
+MEMO         __pycache__        classic.py  helpers.py   server.py         zerodeploy.py
+__init__.py  authenticators.py  factory.py  registry.py  teleportation.py
+hacker@commands~an-epic-filesystem-quest:/opt/pwndbg/.venv/lib/python3.8/site-packages/rpyc/utils$ cat MEMO
+Lucky listing!
+The next clue is in: /usr/share/racket/pkgs/htdp-lib/lang/private
+hacker@commands~an-epic-filesystem-quest:/opt/pwndbg/.venv/lib/python3.8/site-packages/rpyc/utils$ cd /usr/share/racket/pkgs/htdp-lib/lang/private
+hacker@commands~an-epic-filesystem-quest:/usr/share/racket/pkgs/htdp-lib/lang/private$ ls
+INSIGHT            continuation-mark-key.rkt   provide-and-scribble.rkt   teach-module-begin.rkt  textbook-pls-spec.rkt
+advanced-funs.rkt  create-htdp-executable.rkt  rewrite-error-message.rkt  teach-shared.rkt        todo.rkt
+and-or-map.rkt     firstorder.rkt              set-result.rkt             teach.rkt               tp-dialog.rkt
+beginner-funs.rkt  imageeq.rkt                 signature-syntax.rkt       teachhelp.rkt
+compiled           intermediate-funs.rkt       sl-eval.rkt                teachprims.rkt
+hacker@commands~an-epic-filesystem-quest:/usr/share/racket/pkgs/htdp-lib/lang/private$ cat INSIGHT
+Congratulations, you found the clue!
+The next clue is in: /usr/local/lib/python3.8/dist-packages/mpmath/calculus/__pycache__
+
+Watch out! The next clue is **trapped**. You'll need to read it out without 'cd'ing into the directory; otherwise, the clue will self destruct!
+hacker@commands~an-epic-filesystem-quest:/usr/share/racket/pkgs/htdp-lib/lang/private$ cat /usr/local/lib/python3.8/dist-packages/mpmath/calculus/__pycache__
+cat: /usr/local/lib/python3.8/dist-packages/mpmath/calculus/__pycache__: Is a directory
+hacker@commands~an-epic-filesystem-quest:/usr/share/racket/pkgs/htdp-lib/lang/private$ ls /usr/local/lib/python3.8/dist-packages/mpmath/calculus/__pycache__
+LEAD-TRAPPED                  calculus.cpython-38.pyc         inverselaplace.cpython-38.pyc  polynomials.cpython-38.pyc
+__init__.cpython-38.pyc       differentiation.cpython-38.pyc  odes.cpython-38.pyc            quadrature.cpython-38.pyc
+approximation.cpython-38.pyc  extrapolation.cpython-38.pyc    optimization.cpython-38.pyc
+hacker@commands~an-epic-filesystem-quest:/usr/share/racket/pkgs/htdp-lib/lang/private$ cat /usr/local/lib/python3.8/dist
+-packages/mpmath/calculus/__pycache__/LEAD-TRAPPED
+Yahaha, you found me!
+The next clue is in: /usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0
+
+The next clue is **delayed** --- it will not become readable until you enter the directory with 'cd'.
+hacker@commands~an-epic-filesystem-quest:/usr/share/racket/pkgs/htdp-lib/lang/private$ cd  /usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0
+hacker@commands~an-epic-filesystem-quest:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0$ ls
+2.10.0  README  gdk-pixbuf-query-loaders
+hacker@commands~an-epic-filesystem-quest:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0$ cat README
+Tubular find!
+The next clue is in: /usr/local/lib/python3.8/dist-packages/traitlets/config
+
+The next clue is **hidden** --- its filename starts with a '.' character. You'll need to look for it using special options to 'ls'.
+hacker@commands~an-epic-filesystem-quest:/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0$ cd  /usr/local/lib/python3.8/dist-packages/traitlets/config
+hacker@commands~an-epic-filesystem-quest:/usr/local/lib/python3.8/dist-packages/traitlets/config$ ls -a
+.   .NUGGET      __pycache__     argcomplete_config.py  loader.py   sphinxdoc.py
+..  __init__.py  application.py  configurable.py        manager.py
+hacker@commands~an-epic-filesystem-quest:/usr/local/lib/python3.8/dist-packages/traitlets/config$ cat /.NUGGET
+cat: /.NUGGET: No such file or directory
+hacker@commands~an-epic-filesystem-quest:/usr/local/lib/python3.8/dist-packages/traitlets/config$ cat .NUGGET
+Lucky listing!
+The next clue is in: /usr/share/racket/pkgs/rackunit-lib/rackunit/private/compiled
+hacker@commands~an-epic-filesystem-quest:/usr/local/lib/python3.8/dist-packages/traitlets/config$ cd /usr/share/racket/pkgs/rackunit-lib/rackunit/private/compiled
+hacker@commands~an-epic-filesystem-quest:/usr/share/racket/pkgs/rackunit-lib/rackunit/private/compiled$ ls
+BLUEPRINT           check-info_rkt.zo     equal-within_rkt.zo  location_rkt.zo    test-case_rkt.zo    test_rkt.zo
+base_rkt.dep        check_rkt.dep         format_rkt.dep       result_rkt.dep     test-suite_rkt.dep  util_rkt.dep
+base_rkt.zo         check_rkt.zo          format_rkt.zo        result_rkt.zo      test-suite_rkt.zo   util_rkt.zo
+check-info_rkt.dep  equal-within_rkt.dep  location_rkt.dep     test-case_rkt.dep  test_rkt.dep
+hacker@commands~an-epic-filesystem-quest:/usr/share/racket/pkgs/rackunit-lib/rackunit/private/compiled$ cat BLUEPRINT
+CONGRATULATIONS! Your perserverence has paid off, and you have found the flag!
+It is: pwn.college{gFACbllozUzHvi_cWyqq71g9oWz.QX5IDO0wCO1EzNzEzW}
+```
+
+## What I learnt
+I have learnt how to efficiently use the cat ls and cd command to retrieve the flag. I followed the clues given by the pwn.college and the bash. One clue let to another and so on. I started off with cd'ing to the root directory, then listed all the files. I then kept reading the clues which led me to further directories to which I kept cd'ing to
+
+## References
+I have reffered to the video and the instructions mentioned to complete this challenge.
+
+# 12. making directories
+In this challenge, we are to explore the mkdir command to make new directories. Firstly mkdir is executed to make the /tmp/pwn directory and touch is used to make the /challenge file
+
+## My solve
+**pwn.college{IAQTHt2_qCycbF-g59FKLNqeFHC.QXxMDO0wCO1EzNzEzW}**
+
+To solve this challenge, I first used the mkdir command to create the /tmp/pwn directory. I then used the touch command to make the /challenge file. To retrieve the flag, /challenge/run was executed.
+
+```
+hacker@commands~making-directories:~$ mkdir /tmp/pwn
+hacker@commands~making-directories:~$ cd /tmp/pwn
+hacker@commands~making-directories:/tmp/pwn$ touch college
+hacker@commands~making-directories:/tmp/pwn$ /challenge/run
+Success! Here is your flag:
+pwn.college{IAQTHt2_qCycbF-g59FKLNqeFHC.QXxMDO0wCO1EzNzEzW}
+```
+
+## What I learnt
+I have learnt how to use the mkdir command to create new directories. I've also then learnt to first cd into the new directory to  make a new file in it.
+
+## References
+I have reffered to the video and the instructions mentioned to complete this challenge.
+
+# 13. finding files
+In this challenge, we deal with the file command to find a specific file in a directory.
+
+## My solve
+**pwn.college{gFACbllozUzHvi_cWyqq71g9oWz.QX5IDO0wCO1EzNzEzW}**
+
+To solve this challenge I first used the find command (find / -name flag) to list all the files named flag. I then started reading the files to retrieve the flag, ignoring the ones saying "permission denied"
+
+```
+hacker@commands~finding-files:~$ find / -name flag
+find: ‘/tmp/tmp.TpSOPGOVKK’: Permission denied
+find: ‘/etc/ssl/private’: Permission denied
+/usr/local/lib/python3.8/dist-packages/pwnlib/flag
+/usr/share/locale/kv/LC_MESSAGES/flag
+find: ‘/var/cache/apt/archives/partial’: Permission denied
+find: ‘/var/cache/ldconfig’: Permission denied
+find: ‘/var/cache/private’: Permission denied
+find: ‘/var/lib/apt/lists/partial’: Permission denied
+find: ‘/var/lib/mysql-files’: Permission denied
+find: ‘/var/lib/private’: Permission denied
+find: ‘/var/lib/mysql’: Permission denied
+find: ‘/var/lib/mysql-keyring’: Permission denied
+find: ‘/var/lib/php/sessions’: Permission denied
+find: ‘/var/log/private’: Permission denied
+find: ‘/var/log/apache2’: Permission denied
+find: ‘/var/log/mysql’: Permission denied
+find: ‘/run/mysqld’: Permission denied
+find: ‘/run/sudo’: Permission denied
+find: ‘/root’: Permission denied
+/opt/pwndbg/.venv/lib/python3.8/site-packages/pwnlib/flag
+find: ‘/proc/tty/driver’: Permission denied
+find: ‘/proc/1/task/1/fd’: Permission denied
+find: ‘/proc/1/task/1/fdinfo’: Permission denied
+find: ‘/proc/1/task/1/ns’: Permission denied
+find: ‘/proc/1/fd’: Permission denied
+find: ‘/proc/1/map_files’: Permission denied
+find: ‘/proc/1/fdinfo’: Permission denied
+find: ‘/proc/1/ns’: Permission denied
+find: ‘/proc/7/task/7/fd’: Permission denied
+find: ‘/proc/7/task/7/fdinfo’: Permission denied
+find: ‘/proc/7/task/7/ns’: Permission denied
+find: ‘/proc/7/fd’: Permission denied
+find: ‘/proc/7/map_files’: Permission denied
+find: ‘/proc/7/fdinfo’: Permission denied
+find: ‘/proc/7/ns’: Permission denied
+/nix/store/ka6xbd6z6wj5d6frl7ym4nzfc6p2wkdx-radare2-5.9.8/share/radare2/5.9.8/flag
+/nix/store/f31j0igg7ms3yrj5gm3cm76bjcmdl8w5-python3.12-pwntools-4.13.1/lib/python3.12/site-packages/pwnlib/flag
+/nix/store/7ns27apnvn4qj4q5c82x0z1lzixrz47p-radare2-5.9.8/share/radare2/5.9.8/flag
+/nix/store/5z3sjp9r463i3siif58hq5wj5jmy5m98-python3.12-pwntools-4.13.1/lib/python3.12/site-packages/pwnlib/flag
+/nix/store/n6vb30rd7kkwjj595pgm0dmsmfaqi6i5-rizin-0.7.3/share/rizin/flag
+/nix/store/5n5lp1m8gilgrsriv1f2z0jdjk50ypcn-rizin-0.7.3/share/rizin/flag
+/nix/store/bnlabj2vsbljhp597ir29l51nrqhm89w-rizin-0.7.4/share/rizin/flag
+/nix/store/s8b49lb0pqwvw0c6kgjbxdwxcv2bp0x4-radare2-5.9.8/share/radare2/5.9.8/flag
+/nix/store/8qvj9mzdq2qxgjigw4ysqgbkcx1zi80y-python3.13-pwntools-4.14.1/lib/python3.13/site-packages/pwnlib/flag
+/nix/store/1hyxipvwpdpcxw90l5pq1nvd6s6jdi5m-python3.12-pwntools-4.14.1/lib/python3.12/site-packages/pwnlib/flag
+/nix/store/dz2qxywk6d8hc1gkarpwbhyxb50sh2ak-pwntools-4.14.0/lib/python3.13/site-packages/pwnlib/flag
+hacker@commands~finding-files:~$ cat /nix/store/f31j0igg7ms3yrj5gm3cm76bjcmdl8w5-python3.12-pwntools-4.13.1/lib/python3.
+hacker@commands~finding-files:/nix/store/5n5lp1m8gilgrsriv1f2z0jdjk50ypcn-rizin-0.7.3/share/rizin/flag$ cat /usr/local/lib/python3.8/dist-packages/pwnlib/flag
+cat: /usr/local/lib/python3.8/dist-packages/pwnlib/flag: Is a directory
+hacker@commands~finding-files:/nix/store/5n5lp1m8gilgrsriv1f2z0jdjk50ypcn-rizin-0.7.3/share/rizin/flag$ cat /usr/share/l
+ocale/kv/LC_MESSAGES/flag
+pwn.college{U4motvGsRGymlDou25lCH2oCHhr.QXyMDO0wCO1EzNzEzW}
+```
+
+## What I learnt
+I have learnt how to use the find command to find a given file in a directory.
+
+## References
+I have reffered to the video and the instructions mentioned to complete this challenge.
+
+# 14. linking files
+In this challenge,
