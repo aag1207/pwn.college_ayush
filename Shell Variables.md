@@ -133,7 +133,47 @@ I have learnt how to assign the output of a program to a variable using ().
 https://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO-5.html and the pwn.college instructions.
 
 # 7. Reading Input
-In this challenge, 
+In this challenge, we learn how to read an input from the user which reads the input into the variable
+
+## My solve
+**pwn.college{0_jki9d2vADgQjxIpSQeOosZmOf.QX4cTN0wCO1EzNzEzW}**
+
+To solve this challenge, I first executed read -p "INPUT:COLLEGE" PWN and then assigned COLLEGE to PWN to retrieve the flag.
+
+```
+hacker@variables~reading-input:~$ read -p "INPUT:COLLEGE" PWN
+INPUT:COLLEGE
+hacker@variables~reading-input:~$ PWN=COLLEGE
+You've set the PWN variable properly! As promised, here is the flag:
+pwn.college{0_jki9d2vADgQjxIpSQeOosZmOf.QX4cTN0wCO1EzNzEzW}
+```
+
+## What I learnt
+I have learnt how to read the input given by us and assign it to the variable using "read".
+
+## References
+https://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO-5.html and the pwn.college instructions.
+
+# 8. Reading Files
+In this challenge, we learn how to read files excluding extra steps.
+
+## My solve
+**pwn.college{gfgMtM9gfwsJ1HhNRJkh-YTVxr9.QXwIDO0wCO1EzNzEzW}**
+
+To solve this challenge, I read the /challenge/read_me file to VAR which basically read the file to retrieve the flag.
+
+```
+hacker@variables~reading-files:~$ read PWN < /challenge/read_me
+You've set the PWN variable properly! As promised, here is the flag:
+pwn.college{gfgMtM9gfwsJ1HhNRJkh-YTVxr9.QXwIDO0wCO1EzNzEzW}
+```
+
+## What I learnt
+I have learnt how to read files directly into a variable through the read command.
+
+## References
+https://tldp.org/HOWTO/Bash-Prog-Intro-HOWTO-5.html and the pwn.college instructions.
+
 
 
 
