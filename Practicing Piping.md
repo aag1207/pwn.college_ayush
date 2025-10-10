@@ -363,15 +363,14 @@ https://web.archive.org/web/20220629044814/http://bencane.com:80/2012/04/16/unix
 In this challenge, they told us that /challenge/pwn must be piped into /challenge/college, but we need to intercept the data to see what pwn needs from you, using the tee command. 
 
 ## My solve
-**pwn.college{QVKNeSnLuFX9mWOzVtN7y8dxU6i.QXxITO0wiN3kjNzEzW}**
+**pwn.college{AZWaq98fCPxdiOJkw6qpaL-K5Vx.QXxITO0wCO1EzNzEzW}**
 
 I first used the ls command to list all the files in the home directory. I read PWN and COLLEGE files, but nothing were there. I then tried getting output of /challenge/pwn, however that didnt work as well. I then used the tee command to duplicate the output of /challenge/pwn to the PWN file, then i read the file to get the secret code and then i used that secret code as argument with /challenge/pwn and connected the output of that with /challenge/college using the pipe operator (|) to get the flag. 
 
 ```
 hacker@piping~duplicating-piped-data-with-tee:~$ ls
-COLLEGE  Desktop  PWN  cmd_output  hello  i  instructions  myflag  not-the-flag  the-flag
+COLLEGE  Desktop  PWN  foo.1x.dvi  h  instructions  myflag  not-the-flag  pwn.sh  the-flag
 hacker@piping~duplicating-piped-data-with-tee:~$ cat PWN
-COLLEGE
 hacker@piping~duplicating-piped-data-with-tee:~$ cat COLLEGE
 PWN
 hacker@piping~duplicating-piped-data-with-tee:~$ /challenge/pwn
@@ -387,12 +386,12 @@ output of 'pwn' and figure out what the code needs to be.
 hacker@piping~duplicating-piped-data-with-tee:~$ cat PWN
 Usage: /challenge/pwn --secret [SECRET_ARG]
 
-SECRET_ARG should be "QVKNeSnL"
-hacker@piping~duplicating-piped-data-with-tee:~$ /challenge/pwn --secret QVKNeSnL | /challenge/college
+SECRET_ARG should be "AZWaq98f"
+hacker@piping~duplicating-piped-data-with-tee:~$ /challenge/pwn --secret AZWaq98f | /challenge/college
 Processing...
 Correct! Passing secret value to /challenge/college...
 Great job! Here is your flag:
-pwn.college{QVKNeSnLuFX9mWOzVtN7y8dxU6i.QXxITO0wiN3kjNzEzW}
+pwn.college{AZWaq98fCPxdiOJkw6qpaL-K5Vx.QXxITO0wCO1EzNzEzW}
 ```
 
 ## What I learned
@@ -427,7 +426,7 @@ https://web.archive.org/web/20220629044814/http://bencane.com:80/2012/04/16/unix
 
 
 ## My solve
-**pwn.college{g1PoIj6htmyfNhaY9ggECPqeQ9p.QXwgDN1wiN3kjNzEzW}**
+**pwn.college{gZpe9kARBaJ9-sIZhcRUZnNcIij.QXwgDN1wCO1EzNzEzW}**
 
 explain your solve and how you got to it, explain any incorrect tangents you went on while solving.
 
@@ -439,10 +438,10 @@ don't style it too much, your solve should be readable and understandable by you
 hacker@piping~writing-to-multiple-programs:~$ /challenge/hack | tee >(/challenge/the) >(/challenge/planet)
 This secret data must directly and simultaneously make it to /challenge/the and
 /challenge/planet. Don't try to copy-paste it; it changes too fast.
-61518438498827370
+117783433801027072
 Congratulations, you have duplicated data into the input of two programs! Here
 is your flag:
-pwn.college{g1PoIj6htmyfNhaY9ggECPqeQ9p.QXwgDN1wiN3kjNzEzW}
+pwn.college{gZpe9kARBaJ9-sIZhcRUZnNcIij.QXwgDN1wCO1EzNzEzW}
 ```
 
 ## What I learned
@@ -453,41 +452,34 @@ references used: challenge statements in https://pwn.college/linux-luminarium/pi
 https://web.archive.org/web/20220629044814/http://bencane.com:80/2012/04/16/unix-shell-the-art-of-io-redirection/.
 
 # 13. Split piping stderr and stdout: 
+In this challenge, we are asked to get hack's stdout to go to /challenge/planet and stderr to go to /challenge/the — separately, not mixed.
 
-### Put challenge description here
+## My solve
+**pwn.college{YNnb-WV3vefBvAzOiyYY0Ww2zZy.QXxQDM2wCO1EzNzEzW}**
 
-**Flag:** ``
-
-explain your solve and how you got to it, explain any incorrect tangents you went on while solving.
-
-to put code snippets, put three backticks and for images and all other stuff you wish to put here, refer to the documentation given to you.
-
-don't style it too much, your solve should be readable and understandable by you so that when you have doubts, you refer to your own writeups, instead of gpt.
+To solve this challenge, I wrote /challenge/hack 2> >( /challenge/the ) | /challenge/planet in the terminal because | /challenge/planet connects hack's stdout to planet's stdin, 2> >( /challenge/the ) redirects hack's stderr into a process substitution; the shell runs /challenge/the with its stdin coming from that redirection, so stderr goes into /challenge/the alone.
 
 ```
-#!/bin/bash
-
-example triple ticks for bash
-
-pwn.college{helloworld}
+hacker@piping~split-piping-stderr-and-stdout:~$ /challenge/hack 2> >( /challenge/the ) | /challenge/planet
+Congratulations, you have learned a redirection technique that even experts
+struggle with! Here is your flag:
+pwn.college{YNnb-WV3vefBvAzOiyYY0Ww2zZy.QXxQDM2wCO1EzNzEzW}
 ```
 
 ## What I learned
-
-explain what you learned
+I learnt how to redirect stderr and stdout seperately, not mixed.
 
 ## References
-
 references used: challenge statements in https://pwn.college/linux-luminarium/piping/, https://www.rozmichelle.com/pipes-forks-dups/, 
 https://web.archive.org/web/20220629044814/http://bencane.com:80/2012/04/16/unix-shell-the-art-of-io-redirection/.
 
 # 14. Named pipes: 
+In this challenge, they asked us to to create a /tmp/flag_fifo file and redirect the stdout of /challenge/run to it. If we are successful, /challenge/run will write the flag into the FIFO.
 
-### In this challenge, they asked us to to create a /tmp/flag_fifo file and redirect the stdout of /challenge/run to it. If we are successful, /challenge/run will write the flag into the FIFO.
+## My solve
+**pwn.college{wcUMav4UxiZhpybx2g2amfOHi_z.01MzMDOxwiN3kjNzEzW}**
 
-**Flag:** `pwn.college{wcUMav4UxiZhpybx2g2amfOHi_z.01MzMDOxwiN3kjNzEzW}`
-
-I first made a new fifo by using the mkfifo command. I then redirected the output of /challenge/run to the fifo file using ">", then i read the fifo file to get the flag.
+To solve this challenge, I first made a new fifo by using the mkfifo command. I then redirected the output of /challenge/run to the fifo file using ">", then i read the fifo file to get the flag.
 
 ```
 hacker@piping~named-pipes:~$ mkfifo /tmp/flag_fifo
